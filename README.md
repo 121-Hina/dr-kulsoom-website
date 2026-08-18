@@ -148,7 +148,3 @@ The live site deploys through the Firebase CLI.
 - True scheduled reminder emails once a paid Firebase plan is in place
 - Individual indexed URLs for each blog post rather than one shared listing page
 - Searching and browsing older chat history beyond what is currently visible in a conversation
-
-## Acknowledgments
-
-Built and maintained as a pro bono project for Dr Kulsoom Skin and Laser Clinic.
