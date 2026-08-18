@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Kulsoom | Skin & Laser Clinic</title>
+<meta name="description" content="Dr. Kulsoom, MBBS (Gold Medalist), FCPS Dermatology. Skin & Laser Clinic offering face, hair and skin repair treatments — in-person for women & children, online consultations open to everyone.">
+
+<!-- Favicon / browser tab icon -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Open Graph tags: control how the site looks when shared or listed -->
+<meta property="og:title" content="Dr. Kulsoom | Skin & Laser Clinic">
+<meta property="og:description" content="MBBS (Gold Medalist), FCPS Dermatology. In-person care for women & children, online consultations open to everyone.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://drkulsoomclinic.com">
+<meta property="og:site_name" content="Dr. Kulsoom Skin & Laser Clinic">
+<meta property="og:image" content="https://drkulsoomclinic.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dr. Kulsoom | Skin & Laser Clinic">
+<meta name="twitter:description" content="MBBS (Gold Medalist), FCPS Dermatology. Face, hair and skin treatments, online and in-person.">
+<meta name="twitter:image" content="https://drkulsoomclinic.com/og-image.png">
+
+<!-- Structured data: tells Google this page is a medical clinic, with its details -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "Dr. Kulsoom Skin & Laser Clinic",
+  "description": "Dermatology clinic offering face, hair and skin repair treatments. In-person visits for women and children under 12, with online consultations open to everyone.",
+  "medicalSpecialty": "Dermatology",
+  "url": "https://drkulsoomclinic.com",
+  "image": "https://drkulsoomclinic.com/logo-512.png",
+  "logo": "https://drkulsoomclinic.com/logo-512.png",
+  "telephone": "",
+  "priceRange": "PKR",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "Swat International Hospital, opposite Central Hospital",
+      "addressLocality": "Saidu Sharif",
+      "addressRegion": "Khyber Pakhtunkhwa",
+      "addressCountry": "PK"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "Rahat Medical Complex",
+      "addressLocality": "Barikot",
+      "addressRegion": "Khyber Pakhtunkhwa",
+      "addressCountry": "PK"
+    }
+  ]
+}
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="firebase-config.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module">
+  import { mountNotificationBell } from "./notifications.js";
+  mountNotificationBell("notifBellSlot");
+</script>
+<script type="module" src="services.js"></script>
+<script type="module" src="location-map.js"></script>
+<script type="module">
+  import { initSupportChat } from "./support-chat.js";
+  initSupportChat();
+</script>
+</head>
+<body>
+
+<!-- ===== HEADER / NAV ===== -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand">
+      <img src="logo-512.png" alt="Dr. Kulsoom Skin & Laser Clinic logo" class="brand-logo">
+      <span class="brand-text">Dr. Kulsoom</span>
+    </a>
+    <div class="header-actions">
+      <div id="notifBellSlot" class="notif-bell-slot" hidden></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#top" class="nav-pill">Home</a>
+      <a href="#about" class="nav-pill">About</a>
+      <a href="#services" class="nav-pill">Services</a>
+      <a href="#locations" class="nav-pill">Locations</a>
+      <a href="booking.html" class="nav-pill" id="navBookLink">Book</a>
+      <a href="my-bookings.html" class="nav-pill" id="navMyBookings" hidden>My Bookings</a>
+      <a href="blog.html" class="nav-pill">Blog</a>
+      <a href="#" class="nav-pill" id="navSupportLink" data-open-support>Support</a>
+      <a href="reviews.html" class="nav-pill">Reviews</a>
+      <a href="#" id="navSignIn" class="nav-pill signin-link">Sign In</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">For Women, Best Care</p>
+    <h1 class="hero-title">Dr. Kulsoom</h1>
+    <p class="hero-subtitle">Skin &amp; Laser Clinic</p>
+    <div class="hero-rule"><span class="diamond">◆</span></div>
+    <p class="credentials">MBBS (Gold Medalist) &nbsp;·&nbsp; FCPS Dermatology &nbsp;·&nbsp; MCPS Medicine</p>
+    <div class="hero-btn-row">
+      <a href="booking.html" class="btn btn-primary" id="heroBookBtn">Book Your Appointment</a>
+      <a href="blog.html" class="btn btn-outline-hero">Read Our Blog</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="wrap about-inner">
+    <div class="about-hex">
+      <div class="hex-cell"></div>
+      <div class="hex-cell"></div>
+      <div class="hex-cell hex-center"></div>
+      <div class="hex-cell"></div>
+      <div class="hex-cell"></div>
+    </div>
+    <div class="about-text">
+      <h2>Gentle, expert dermatology for every skin story</h2>
+      <p>Dr. Kulsoom brings gold-medalist training in dermatology to a practice built around
+      one idea: skin care that listens first. From acne and pigmentation to hair restoration
+      and laser treatments, every plan is tailored, explained plainly, and followed through
+      with care, in person and online, with each consultation given a full 30 minutes.</p>
+      <p>Warm, welcoming care in person for women and children under 12, and online
+      consultations open to everyone. Every question is welcome, every treatment is
+      explained before it begins, and every patient leaves with a clear next step.</p>
+      <ul class="specialty-chips">
+        <li>Acne &amp; Pigmentation</li>
+        <li>Hair Restoration</li>
+        <li>Anti-Aging &amp; Botox</li>
+        <li>Laser &amp; PRP</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="wrap">
+    <p class="section-eyebrow">Treatments &amp; Pricing</p>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-intro">Every treatment below is performed by Dr. Kulsoom herself. Tap a category to see what's included and the price per session.</p>
+
+    <div id="servicesContainer">
+    <div class="service-group">
+      <button class="group-title" type="button"><span class="group-num">01</span> Face Treatments <span class="group-toggle">+</span></button>
+      <div class="service-list">
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Chemical Peel</h4>
+              <p>Acne treatment, per session</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 2,000<span class="unit">/session</span></div>
+          </div>
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Chemical Peel - Whitening</h4>
+              <p>Skin brightening &amp; even tone</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 3,000<span class="unit">/session</span></div>
+          </div>
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Hydrafacial - Simple</h4>
+              <p>Deep cleanse &amp; hydration</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 6,000<span class="unit"></span></div>
+          </div>
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Hydrafacial + Anti-Aging Serums</h4>
+              <p>With advanced youth-restoring serums</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 8,000<span class="unit"></span></div>
+          </div>
+        
+      </div>
+    </div>
+  
+    <div class="service-group">
+      <button class="group-title" type="button"><span class="group-num">02</span> Skin Repair &amp; Glow Treatments <span class="group-toggle">+</span></button>
+      <div class="service-list">
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Microneedling + PRP</h4>
+              <p>Repairs skin &amp; boosts natural healing</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 5,000<span class="unit"></span></div>
+          </div>
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Mesotherapy</h4>
+              <p>Microneedling + PRP + Serums, full skin repair boost</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 10,000<span class="unit"></span></div>
+          </div>
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Botox - Upper Face</h4>
+              <p>Smooths fine lines &amp; wrinkles</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 30,000<span class="unit"></span></div>
+          </div>
+        
+      </div>
+    </div>
+  
+    <div class="service-group">
+      <button class="group-title" type="button"><span class="group-num">03</span> Hair Treatments <span class="group-toggle">+</span></button>
+      <div class="service-list">
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Hair PRP</h4>
+              <p>Hair growth therapy</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 6,000<span class="unit"></span></div>
+          </div>
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Hair PRP + Serums</h4>
+              <p>With growth-boosting serums</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 10,000<span class="unit"></span></div>
+          </div>
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Hair Laser</h4>
+              <p>Face / Chin area</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 6,000<span class="unit"></span></div>
+          </div>
+        
+      </div>
+    </div>
+  
+    <div class="service-group">
+      <button class="group-title" type="button"><span class="group-num">04</span> Other Procedures <span class="group-toggle">+</span></button>
+      <div class="service-list">
+        
+          <div class="service-row">
+            <div class="service-info">
+              <h4>Mole Removal</h4>
+              <p>Per mole</p>
+            </div>
+            <div class="service-price"><span class="cur">PKR</span> 2,000<span class="unit">/mole</span></div>
+          </div>
+        
+      </div>
+    </div>
+  
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOCATIONS ===== -->
+<section class="locations" id="locations">
+  <div class="wrap">
+    <p class="section-eyebrow">Clinic Locations &amp; Timings</p>
+    <h2 class="section-title">Where to Find Us</h2>
+    <p class="locations-note">Physical visits can be booked at either location below.</p>
+    <div class="location-grid">
+      <div class="location-card">
+        <span class="location-num">1</span>
+        <h3>Swat International Hospital</h3>
+        <p class="location-addr">Saidu Sharif, opposite Central Hospital</p>
+        <p class="location-time">Mon - Thu &nbsp;·&nbsp; 2:00 pm - 7:00 pm</p>
+        <button class="location-map-toggle" type="button" data-query="Swat International Hospital, Saidu Sharif, Swat">View on map</button>
+        <div class="location-map-preview" hidden>
+          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map — Swat International Hospital"></iframe>
+          <a class="location-map-open" href="#" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+        </div>
+      </div>
+      <div class="location-card">
+        <span class="location-num">2</span>
+        <h3>Rahat Medical Complex</h3>
+        <p class="location-addr">Barikot</p>
+        <p class="location-time">Fri, Sat &amp; Sun &nbsp;·&nbsp; 4:00 pm - 7:00 pm</p>
+        <button class="location-map-toggle" type="button" data-query="34.6821624,72.2262903">View on map</button>
+        <div class="location-map-preview" hidden>
+          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map — Rahat Medical Complex"></iframe>
+          <a class="location-map-open" href="#" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST STRIP (end of page) ===== -->
+<section class="trust">
+  <div class="wrap trust-inner">
+    <div class="trust-item">
+      <span class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.4 1.4L17 3l1 2.4 2.4 1L21 9l1.4 2.4L21 14l-.6 2.6-2.4 1-1 2.4-2.6-.4L12 21l-2.4-1.4L7 20l-1-2.4-2.4-1L4 14l-1.4-2.4L4 9l.6-2.6 2.4-1L8 3l2.6.4L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12.2l2.4 2.4 4.6-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <div>
+        <h4>PMC Verified Doctor</h4>
+        <p>Credentials checked &amp; confirmed.</p>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="6" width="20" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12.5" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+      </span>
+      <div>
+        <h4>100% Secure Payment</h4>
+        <p>Your card details are never stored.</p>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 13a8 8 0 0116 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="2" y="13" width="5" height="7" rx="2" stroke="currentColor" stroke-width="1.6"/><rect x="17" y="13" width="5" height="7" rx="2" stroke="currentColor" stroke-width="1.6"/></svg>
+      </span>
+      <div>
+        <h4>Full Refund if Unavailable</h4>
+        <p>Never charged for a missed slot.</p>
+      </div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="10" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      <div>
+        <h4>Support on Call</h4>
+        <p>We're here to help, every day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SIGN IN / SIGN UP MODAL ===== -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal">
+    <button class="auth-close" id="authClose" type="button" aria-label="Close">&times;</button>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login" type="button">Sign In</button>
+      <button class="auth-tab" data-tab="signup" type="button">Create Account</button>
+    </div>
+
+    <p class="auth-first-time-hint">First time here? <button type="button" class="auth-switch-signup" id="authSwitchSignup">Create an account</button> before signing in.</p>
+
+    <!-- Login form -->
+    <form class="auth-form" id="loginForm">
+      <label>
+        <span>Email</span>
+        <input type="email" required autocomplete="email">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" required autocomplete="current-password">
+      </label>
+      <button type="button" class="forgot-password-link" id="forgotPasswordBtn">Forgot password?</button>
+      <p class="auth-error" id="loginError" hidden></p>
+      <p class="auth-success" id="resetSuccess" hidden></p>
+      <button type="submit" class="btn btn-primary auth-submit">Sign In</button>
+    </form>
+
+    <!-- Signup form -->
+    <form class="auth-form" id="signupForm" hidden>
+      <label>
+        <span>Full Name</span>
+        <input type="text" required autocomplete="name">
+      </label>
+      <label>
+        <span>Phone Number</span>
+        <input type="tel" required autocomplete="tel">
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" required autocomplete="email">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" required minlength="6" autocomplete="new-password">
+      </label>
+      <p class="auth-error" id="signupError" hidden></p>
+      <button type="submit" class="btn btn-primary auth-submit">Create Account</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== SUPPORT CHAT PANEL ===== -->
+<div class="chat-overlay" id="supportChatOverlay">
+  <div class="chat-window">
+    <div class="chat-window-head">
+      <div class="chat-window-who">
+        <span class="chat-avatar chat-avatar-support">DK</span>
+        <div>
+          <p class="chat-window-name">Clinic Support</p>
+          <p class="chat-window-meta">We usually reply within a few hours</p>
+        </div>
+      </div>
+      <div class="chat-window-actions">
+        <button class="auth-close" id="supportChatCloseBtn" type="button" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="supportChatMessages"></div>
+    <form class="chat-input-row" id="supportChatForm">
+      <label class="chat-attach-btn" title="Attach a file">
+        <input type="file" id="supportChatFile" accept=".pdf,.doc,.docx,image/*" class="chat-file-input">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5V17a4 4 0 01-4 4H8a5 5 0 01-5-5V8a4 4 0 014-4h8.5A3.5 3.5 0 0119 7.5V15a2.5 2.5 0 01-5 0V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </label>
+      <input type="text" id="supportChatInput" placeholder="Type a message..." autocomplete="off">
+      <button type="submit" class="chat-send-btn" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11l18-7-7 18-3-8-8-3z" fill="currentColor"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>&copy; <span id="year"></span> Dr. Kulsoom Skin &amp; Laser Clinic. All rights reserved.</p>
+    <a href="#" id="footerSignIn" class="signin-link">Sign In</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+
+  // Support chat no longer requires sign-in — guests get an auto-generated
+  // "Patient N" label. Just navigate straight there.
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('nav-open');
+    toggle.classList.toggle('is-active', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      toggle.classList.remove('is-active');
+      toggle.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
+</body>
+</html>

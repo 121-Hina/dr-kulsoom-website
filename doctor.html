@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Dashboard | Dr. Kulsoom Clinic</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="dash-body">
+
+<!-- ===== LOGIN GATE ===== -->
+<div class="dash-login-wrap" id="loginWrap">
+  <div class="dash-login-card">
+    <p class="eyebrow">Staff Access</p>
+    <h1 class="dash-login-title">Doctor Sign In</h1>
+    <form id="managerLoginForm" class="auth-form">
+      <label>
+        <span>Email</span>
+        <input type="email" required autocomplete="email">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" required autocomplete="current-password">
+      </label>
+      <button type="button" class="forgot-password-link" id="forgotPasswordBtn">Forgot password?</button>
+      <p class="auth-error" id="loginError" hidden></p>
+      <p class="auth-success" id="resetSuccess" hidden></p>
+      <button type="submit" class="btn btn-primary auth-submit">Sign In</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div class="dash-app" id="dashApp" hidden>
+  <header class="dash-header">
+    <div class="wrap dash-header-inner">
+      <span class="brand-text">Dr. Kulsoom Clinic</span>
+      <span class="dash-role-badge">Doctor</span>
+      <div id="notifBellSlot" class="notif-bell-slot notif-bell-slot-dark" hidden></div>
+      <button class="nav-pill" id="signOutBtn" type="button">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="wrap dash-tabs-wrap">
+    <div class="dash-tabs">
+      <button class="dash-tab active" data-status="upcoming" type="button">Upcoming</button>
+      <button class="dash-tab" data-status="completed" type="button">Completed</button>
+      <button class="dash-tab" data-status="cancelled" type="button">Cancelled</button>
+      <button class="dash-tab" data-status="no_show" type="button">No-Show</button>
+      <button class="dash-tab" id="blogTabBtn" type="button">Blog</button>
+    </div>
+  </div>
+
+  <section class="wrap dash-panel" id="sessionsPanel">
+    <div id="sessionsList" class="dash-list">
+      <p class="dash-empty">Loading sessions...</p>
+    </div>
+  </section>
+
+  <section class="wrap dash-panel" id="blogPanel" hidden>
+    <div class="dash-panel-head">
+      <h2>Blog</h2>
+    </div>
+    <p class="dash-hint">Write a post for patients to read on the site — dermatology tips, awareness, or anything else worth sharing.</p>
+    <div class="dash-edit-card">
+      <label class="dash-edit-label">
+        <span>Title</span>
+        <input type="text" id="blogTitleInput">
+      </label>
+      <label class="dash-edit-label">
+        <span>Photos (optional, you can select more than one)</span>
+        <input type="file" id="blogImageInput" accept="image/*" multiple>
+      </label>
+      <label class="dash-edit-label">
+        <span>Content</span>
+        <textarea id="blogBodyInput" rows="6" style="width:100%; padding:10px 14px; border:1px solid var(--line); border-radius:6px; background:var(--cream-alt); font-family:var(--font-body); font-size:0.9rem; color:var(--ink);"></textarea>
+      </label>
+      <button class="btn btn-primary" id="blogPublishBtn" type="button">Publish Post</button>
+      <p class="dash-save-status" id="blogSaveStatus" hidden></p>
+    </div>
+    <h3 style="font-family:var(--font-display); font-weight:600; color:var(--ink); margin:24px 0 12px;">Published Posts</h3>
+    <div id="blogPostList" class="dash-list"></div>
+  </section>
+</div>
+
+<!-- ===== CHAT PANEL ===== -->
+<div class="chat-overlay" id="chatOverlay">
+  <div class="chat-window">
+    <div class="chat-window-head">
+      <div class="chat-window-who">
+        <span class="chat-avatar" id="chatAvatar">P</span>
+        <div>
+          <p class="chat-window-name" id="chatPatientName"></p>
+          <p class="chat-window-meta" id="chatMeta"></p>
+        </div>
+      </div>
+      <div class="chat-window-actions">
+        <button class="chat-icon-btn" id="extendSessionBtn" type="button" title="Extend 15 min">+15m</button>
+        <button class="chat-icon-btn" id="endSessionBtn" type="button" title="End session">End</button>
+        <button class="auth-close" id="chatCloseBtn" type="button" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <p class="chat-closed-msg" id="chatClosedMsg" hidden>This consultation session has ended. The chat is now closed.</p>
+    <form class="chat-input-row" id="chatForm">
+      <label class="chat-attach-btn" title="Attach a file">
+        <input type="file" id="chatFile" accept=".pdf,.doc,.docx,image/*" class="chat-file-input">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5V17a4 4 0 01-4 4H8a5 5 0 01-5-5V8a4 4 0 014-4h8.5A3.5 3.5 0 0119 7.5V15a2.5 2.5 0 01-5 0V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </label>
+      <button type="button" class="chat-attach-btn" id="chatMicBtn" title="Record a voice message">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="2" width="6" height="12" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M5 11a7 7 0 0014 0M12 18v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+      <button type="submit" class="chat-send-btn" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11l18-7-7 18-3-8-8-3z" fill="currentColor"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="firebase-config.js"></script>
+<script type="module">
+  import { mountNotificationBell } from "./notifications.js";
+  mountNotificationBell("notifBellSlot");
+</script>
+<script type="module" src="doctor.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Blog | Dr. Kulsoom Skin & Laser Clinic</title>
+<meta name="description" id="pageDescription" content="Dermatology tips, skin care awareness, and updates from Dr. Kulsoom Skin & Laser Clinic.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== HEADER / NAV ===== -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html#top" class="brand">
+      <img src="logo-512.png" alt="Dr. Kulsoom Skin & Laser Clinic logo" class="brand-logo">
+      <span class="brand-text">Dr. Kulsoom</span>
+    </a>
+    <div class="header-actions">
+      <div id="notifBellSlot" class="notif-bell-slot" hidden></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="index.html#top" class="nav-pill">Home</a>
+      <a href="index.html#about" class="nav-pill">About</a>
+      <a href="index.html#services" class="nav-pill">Services</a>
+      <a href="index.html#locations" class="nav-pill">Locations</a>
+      <a href="booking.html" class="nav-pill" id="navBookLink">Book</a>
+      <a href="my-bookings.html" class="nav-pill" id="navMyBookings" hidden>My Bookings</a>
+      <a href="blog.html" class="nav-pill nav-active">Blog</a>
+      <a href="#" class="nav-pill" id="navSupportLink" data-open-support>Support</a>
+      <a href="reviews.html" class="nav-pill">Reviews</a>
+      <a href="#" id="navSignIn" class="nav-pill signin-link">Sign In</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== PAGE INTRO ===== -->
+<section class="hero hero-compact">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">From Dr. Kulsoom</p>
+    <h1 class="hero-title booking-title">Blog</h1>
+    <p class="hero-subtitle">Skin care tips &amp; awareness</p>
+  </div>
+</section>
+
+<!-- ===== SINGLE BLOG POST ===== -->
+<section class="blog-section">
+  <div class="wrap" style="max-width: 760px; margin: 0 auto;">
+    <a href="blog.html" class="blog-post-back">&larr; Back to Blog</a>
+    <div id="blogPost">
+      <p class="dash-empty">Loading post...</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SIGN IN / SIGN UP MODAL ===== -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal">
+    <button class="auth-close" id="authClose" type="button" aria-label="Close">&times;</button>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login" type="button">Sign In</button>
+      <button class="auth-tab" data-tab="signup" type="button">Create Account</button>
+    </div>
+
+    <p class="auth-first-time-hint">First time here? <button type="button" class="auth-switch-signup" id="authSwitchSignup">Create an account</button> before signing in.</p>
+
+    <!-- Login form -->
+    <form class="auth-form" id="loginForm">
+      <label>
+        <span>Email</span>
+        <input type="email" required autocomplete="email">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" required autocomplete="current-password">
+      </label>
+      <button type="button" class="forgot-password-link" id="forgotPasswordBtn">Forgot password?</button>
+      <p class="auth-error" id="loginError" hidden></p>
+      <p class="auth-success" id="resetSuccess" hidden></p>
+      <button type="submit" class="btn btn-primary auth-submit">Sign In</button>
+    </form>
+
+    <!-- Signup form -->
+    <form class="auth-form" id="signupForm" hidden>
+      <label>
+        <span>Full Name</span>
+        <input type="text" required autocomplete="name">
+      </label>
+      <label>
+        <span>Phone Number</span>
+        <input type="tel" required autocomplete="tel">
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" required autocomplete="email">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" required minlength="6" autocomplete="new-password">
+      </label>
+      <p class="auth-error" id="signupError" hidden></p>
+      <button type="submit" class="btn btn-primary auth-submit">Create Account</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== SUPPORT CHAT PANEL ===== -->
+<div class="chat-overlay" id="supportChatOverlay">
+  <div class="chat-window">
+    <div class="chat-window-head">
+      <div class="chat-window-who">
+        <span class="chat-avatar chat-avatar-support">DK</span>
+        <div>
+          <p class="chat-window-name">Clinic Support</p>
+          <p class="chat-window-meta">We usually reply within a few hours</p>
+        </div>
+      </div>
+      <div class="chat-window-actions">
+        <button class="auth-close" id="supportChatCloseBtn" type="button" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="supportChatMessages"></div>
+    <form class="chat-input-row" id="supportChatForm">
+      <label class="chat-attach-btn" title="Attach a file">
+        <input type="file" id="supportChatFile" accept=".pdf,.doc,.docx,image/*" class="chat-file-input">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5V17a4 4 0 01-4 4H8a5 5 0 01-5-5V8a4 4 0 014-4h8.5A3.5 3.5 0 0119 7.5V15a2.5 2.5 0 01-5 0V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </label>
+      <input type="text" id="supportChatInput" placeholder="Type a message..." autocomplete="off">
+      <button type="submit" class="chat-send-btn" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11l18-7-7 18-3-8-8-3z" fill="currentColor"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>&copy; <span id="year"></span> Dr. Kulsoom Skin &amp; Laser Clinic. All rights reserved.</p>
+    <a href="#" id="footerSignIn" class="signin-link">Sign In</a>
+  </div>
+</footer>
+
+<script type="module" src="firebase-config.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module">
+  import { initSupportChat } from "./support-chat.js";
+  initSupportChat();
+</script>
+<script type="module" src="blog-post.js"></script>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('nav-open');
+    toggle.classList.toggle('is-active', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      toggle.classList.remove('is-active');
+      toggle.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
+</body>
+</html>

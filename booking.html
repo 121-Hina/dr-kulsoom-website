@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Appointment | Dr. Kulsoom Skin & Laser Clinic</title>
+<meta name="description" content="Book an online or physical consultation with Dr. Kulsoom, MBBS (Gold Medalist), FCPS Dermatology.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="firebase-config.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module">
+  import { mountNotificationBell } from "./notifications.js";
+  mountNotificationBell("notifBellSlot");
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="module" src="booking.js"></script>
+<script type="module">
+  import { initSupportChat } from "./support-chat.js";
+  initSupportChat();
+</script>
+</head>
+<body>
+
+<!-- ===== HEADER / NAV ===== -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html#top" class="brand">
+      <img src="logo-512.png" alt="Dr. Kulsoom Skin & Laser Clinic logo" class="brand-logo">
+      <span class="brand-text">Dr. Kulsoom</span>
+    </a>
+    <div class="header-actions">
+      <div id="notifBellSlot" class="notif-bell-slot" hidden></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="index.html#top" class="nav-pill">Home</a>
+      <a href="index.html#about" class="nav-pill">About</a>
+      <a href="index.html#services" class="nav-pill">Services</a>
+      <a href="index.html#locations" class="nav-pill">Locations</a>
+      <a href="booking.html" class="nav-pill nav-active" id="navBookLink">Book</a>
+      <a href="my-bookings.html" class="nav-pill" id="navMyBookings" hidden>My Bookings</a>
+      <a href="blog.html" class="nav-pill">Blog</a>
+      <a href="#" class="nav-pill" id="navSupportLink" data-open-support>Support</a>
+      <a href="reviews.html" class="nav-pill">Reviews</a>
+      <a href="#" id="navSignIn" class="nav-pill signin-link">Sign In</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== PAGE INTRO ===== -->
+<section class="hero hero-compact">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Get Appointment</p>
+    <h1 class="hero-title booking-title">Book Your Appointment</h1>
+    <p class="hero-subtitle">with Dr. Kulsoom</p>
+  </div>
+</section>
+
+<!-- ===== BOOK / APPOINTMENT ===== -->
+<section class="book" id="book">
+  <div class="wrap book-inner">
+    <h2 class="book-title">How would you like to consult?</h2>
+    <p class="book-sub">Choose an option below. Every consultation is a full 30-minute slot with Dr. Kulsoom.</p>
+
+    <div class="option-grid">
+      <!-- Online Consultation -->
+      <button class="option-card" data-target="online-panel" type="button">
+        <span class="option-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 8h20a6 6 0 016 6v20a6 6 0 01-6 6H14a6 6 0 01-6-6V14a6 6 0 016-6z" stroke="currentColor" stroke-width="2"/>
+            <path d="M16 20h16M16 26h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <h3>Online Consultation</h3>
+        <p>Chat directly with Dr. Kulsoom, share details and photos from wherever you are.</p>
+        <p class="option-price" id="onlineFeeDisplay" hidden></p>
+        <p class="option-note">Login required — helps us keep your details for future consultations.</p>
+        <span class="option-cta">Get Appointment &rarr;</span>
+      </button>
+
+      <!-- Physical Visit -->
+      <button class="option-card" data-target="physical-panel" type="button">
+        <span class="option-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 44S8 30.5 8 19a16 16 0 0132 0c0 11.5-16 25-16 25z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="24" cy="19" r="6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </span>
+        <h3>Physical Visit</h3>
+        <p>Visit Dr. Kulsoom in person, choose whichever clinic suits you.</p>
+        <p class="option-price" id="physicalFeeDisplay" hidden></p>
+        <p class="option-note">No login needed — just fill in your details below.</p>
+        <span class="option-cta">Get Appointment &rarr;</span>
+      </button>
+    </div>
+
+    <!-- Online panel -->
+    <div class="option-panel" id="online-panel">
+      <h4>Book an Online Consultation</h4>
+      <form class="booking-form" data-mode="online">
+        <div class="field-row">
+          <label>
+            <span>Date</span>
+            <input type="date" class="date-input" required>
+          </label>
+          <label>
+            <span>Time slot (30 min)</span>
+            <select class="time-select" required disabled>
+              <option value="">Select a date first</option>
+            </select>
+          </label>
+        </div>
+        <p class="unavailable-msg" hidden></p>
+        <p class="slot-taken-msg" hidden>This time slot has just been booked by someone else. Please choose another.</p>
+
+        <div class="services-picker-box">
+          <p class="services-picker-title">Would you like any of these services during your session? (optional)</p>
+          <div class="services-picker-list"><p class="dash-empty">Loading services...</p></div>
+          <label class="svc-picker-none-row">
+            <input type="checkbox" class="svc-picker-none-checkbox">
+            <span>No thank you, just the consultation for this session</span>
+          </label>
+        </div>
+
+        <p class="payment-warning">&#9888; Without payment, no booking will be entertained. Please complete payment and upload your screenshot below.</p>
+        <div class="pay-box">
+          <p class="pay-title">Payment</p>
+          <div class="payment-breakdown">
+            <p class="pb-row"><span>Session charge (per session)</span><span class="pb-session-fee">PKR 0</span></p>
+            <div class="pb-services"></div>
+            <p class="pb-row pb-total"><span>Total to pay</span><span class="pb-total-amount">PKR 0</span></p>
+          </div>
+          <div class="payment-options"><p class="pay-loading">Loading payment details...</p></div>
+          <p class="pay-note">Send the total amount above to the account selected, then upload a screenshot of the payment.</p>
+          <label class="file-label">
+            <span>Upload payment screenshot</span>
+            <input type="file" class="screenshot-input" accept="image/*" required>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-outline">Request Booking</button>
+        <p class="form-status" hidden></p>
+      </form>
+    </div>
+
+    <!-- Physical panel -->
+    <div class="option-panel" id="physical-panel">
+      <h4>Book a Physical Visit</h4>
+      <form class="booking-form" data-mode="physical">
+        <div class="field-row">
+          <label>
+            <span>Full Name</span>
+            <input type="text" class="guest-name-input" required>
+          </label>
+          <label>
+            <span>Phone Number</span>
+            <input type="tel" class="guest-phone-input" required>
+          </label>
+        </div>
+        <label>
+          <span>Date</span>
+          <input type="date" class="date-input" required>
+        </label>
+        <div class="resolved-location" hidden>
+          <span class="resolved-location-label">Clinic</span>
+          <p class="resolved-location-name"></p>
+          <input type="hidden" class="location-value">
+        </div>
+        <p class="closed-day-msg" hidden>Dr. Kulsoom isn't available at any clinic on this day. Please choose another date.</p>
+        <p class="unavailable-msg" hidden></p>
+        <label>
+          <span>Time slot (30 min)</span>
+          <select class="time-select" required disabled>
+            <option value="">Select a date first</option>
+          </select>
+        </label>
+        <p class="slot-taken-msg" hidden>This time slot has just been booked by someone else. Please choose another.</p>
+
+        <div class="services-picker-box">
+          <p class="services-picker-title">Would you like any of these services during your visit? (optional)</p>
+          <div class="services-picker-list"><p class="dash-empty">Loading services...</p></div>
+          <label class="svc-picker-none-row">
+            <input type="checkbox" class="svc-picker-none-checkbox">
+            <span>No thank you, just the consultation for this session</span>
+          </label>
+        </div>
+
+        <p class="payment-warning">&#9888; Without payment, no booking will be entertained. Please complete payment and upload your screenshot below.</p>
+        <div class="pay-box">
+          <p class="pay-title">Payment</p>
+          <div class="payment-breakdown">
+            <p class="pb-row"><span>Session charge (per session)</span><span class="pb-session-fee">PKR 0</span></p>
+            <div class="pb-services"></div>
+            <p class="pb-row pb-total"><span>Total to pay</span><span class="pb-total-amount">PKR 0</span></p>
+          </div>
+          <div class="payment-options"><p class="pay-loading">Loading payment details...</p></div>
+          <p class="pay-note">Send the total amount above to the account selected, then upload a screenshot of the payment.</p>
+          <label class="file-label">
+            <span>Upload payment screenshot</span>
+            <input type="file" class="screenshot-input" accept="image/*" required>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-outline">Request Booking</button>
+        <p class="form-status" hidden></p>
+      </form>
+    </div>
+
+    <p class="book-quote">"Your skin deserves the best care."</p>
+  </div>
+</section>
+
+<!-- ===== SIGN IN / SIGN UP MODAL ===== -->
+<!-- ===== BOOKING CONFIRMATION POPUP ===== -->
+<div class="auth-overlay" id="bookingConfirmOverlay">
+  <div class="auth-modal booking-confirm-modal">
+    <button class="auth-close" id="bookingConfirmClose" type="button" aria-label="Close">&times;</button>
+    <p class="booking-confirm-icon">&#10003;</p>
+    <h3 class="booking-confirm-title">Request Sent</h3>
+    <p class="booking-confirm-text">Your request has been noted. Our booking manager will confirm once your payment is verified — you'll get a notification here on the site.</p>
+    <button type="button" class="btn btn-primary" id="bookingConfirmOk">Okay</button>
+  </div>
+</div>
+
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal">
+    <button class="auth-close" id="authClose" type="button" aria-label="Close">&times;</button>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login" type="button">Sign In</button>
+      <button class="auth-tab" data-tab="signup" type="button">Create Account</button>
+    </div>
+
+    <p class="auth-first-time-hint">First time here? <button type="button" class="auth-switch-signup" id="authSwitchSignup">Create an account</button> before signing in.</p>
+
+    <!-- Login form -->
+    <form class="auth-form" id="loginForm">
+      <label>
+        <span>Email</span>
+        <input type="email" required autocomplete="email">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" required autocomplete="current-password">
+      </label>
+      <button type="button" class="forgot-password-link" id="forgotPasswordBtn">Forgot password?</button>
+      <p class="auth-error" id="loginError" hidden></p>
+      <p class="auth-success" id="resetSuccess" hidden></p>
+      <button type="submit" class="btn btn-primary auth-submit">Sign In</button>
+    </form>
+
+    <!-- Signup form -->
+    <form class="auth-form" id="signupForm" hidden>
+      <label>
+        <span>Full Name</span>
+        <input type="text" required autocomplete="name">
+      </label>
+      <label>
+        <span>Phone Number</span>
+        <input type="tel" required autocomplete="tel">
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" required autocomplete="email">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" required minlength="6" autocomplete="new-password">
+      </label>
+      <p class="auth-error" id="signupError" hidden></p>
+      <button type="submit" class="btn btn-primary auth-submit">Create Account</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== SUPPORT CHAT PANEL ===== -->
+<div class="chat-overlay" id="supportChatOverlay">
+  <div class="chat-window">
+    <div class="chat-window-head">
+      <div class="chat-window-who">
+        <span class="chat-avatar chat-avatar-support">DK</span>
+        <div>
+          <p class="chat-window-name">Clinic Support</p>
+          <p class="chat-window-meta">We usually reply within a few hours</p>
+        </div>
+      </div>
+      <div class="chat-window-actions">
+        <button class="auth-close" id="supportChatCloseBtn" type="button" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="supportChatMessages"></div>
+    <form class="chat-input-row" id="supportChatForm">
+      <label class="chat-attach-btn" title="Attach a file">
+        <input type="file" id="supportChatFile" accept=".pdf,.doc,.docx,image/*" class="chat-file-input">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5V17a4 4 0 01-4 4H8a5 5 0 01-5-5V8a4 4 0 014-4h8.5A3.5 3.5 0 0119 7.5V15a2.5 2.5 0 01-5 0V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </label>
+      <input type="text" id="supportChatInput" placeholder="Type a message..." autocomplete="off">
+      <button type="submit" class="chat-send-btn" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11l18-7-7 18-3-8-8-3z" fill="currentColor"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>&copy; <span id="year"></span> Dr. Kulsoom Skin &amp; Laser Clinic. All rights reserved.</p>
+    <a href="#" id="footerSignIn" class="signin-link">Sign In</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Toggle booking option panels. Online Consultation requires sign-in
+  // (kept separate so a pending sign-in from one card can never accidentally
+  // open the other card's panel). Physical Visit opens directly as a guest.
+  function openPanel(card) {
+    const targetId = card.getAttribute('data-target');
+    const target = document.getElementById(targetId);
+    const isOpen = target.classList.contains('panel-open');
+    document.querySelectorAll('.option-panel').forEach(p => p.classList.remove('panel-open'));
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('option-active'));
+    if (!isOpen) {
+      target.classList.add('panel-open');
+      card.classList.add('option-active');
+      target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  document.querySelectorAll('.option-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.dataset.target === 'online-panel') {
+        window.requireAuth(() => openPanel(card));
+      } else {
+        openPanel(card);
+      }
+    });
+  });
+
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+
+  // Support chat no longer requires sign-in — guests get an auto-generated
+  // "Patient N" label. The nav link navigates there directly (plain href).
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('nav-open');
+    toggle.classList.toggle('is-active', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      toggle.classList.remove('is-active');
+      toggle.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
+</body>
+</html>
